@@ -33,7 +33,8 @@
       },
       "helpfulLinks": {
         "title": "Helpful Links",
-        "canvas": "Canvas",
+        "canvasUit": "Canvas UiT",
+        "contactDeveloper": "Contact Developer",
         "githubRepo": "GitHub Repository",
         "questionTypes": "Question Types Guide"
       },

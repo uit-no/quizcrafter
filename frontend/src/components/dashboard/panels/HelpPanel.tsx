@@ -96,15 +96,23 @@ export function HelpPanel() {
             </Text>
             <VStack gap={2} align="stretch">
               <Link
-                href="https://canvas.instructure.com"
+                href="https://uit.instructure.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 fontSize="sm"
                 color="blue.600"
                 _hover={{ textDecoration: "underline" }}
               >
-                {t("panels.help.helpfulLinks.canvas")}
+                {t("panels.help.helpfulLinks.canvasUit")}
                 <LuExternalLink />
+              </Link>
+              <Link
+                href="mailto:marius.r.solaas@uit.no"
+                fontSize="sm"
+                color="blue.600"
+                _hover={{ textDecoration: "underline" }}
+              >
+                {t("panels.help.helpfulLinks.contactDeveloper")}
               </Link>
               <Link
                 href="https://github.com/solarmarius/quizcrafter"

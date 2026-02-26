@@ -33,7 +33,8 @@
       },
       "helpfulLinks": {
         "title": "Nyttige lenker",
-        "canvas": "Canvas",
+        "canvasUit": "Canvas UiT",
+        "contactDeveloper": "Kontakt utvikler",
         "githubRepo": "GitHub-repository",
         "questionTypes": "Guide til spørsmålstypene vi støtter"
       },
