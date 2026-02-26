@@ -110,7 +110,7 @@ function QuizQuestions() {
     return !stableReviewStates.includes(
       data.status as (typeof stableReviewStates)[number],
     )
-  }, 5000) // Continue polling every 5 seconds for active processing states
+  }, 10000) // Continue polling every 10 seconds for active processing states
 
   const { data: quiz, isLoading } = useQuery({
     queryKey: queryKeys.quiz(id),

@@ -59,7 +59,7 @@ function QuizLayout() {
     ] as const
 
     return !stableStates.includes(data.status as (typeof stableStates)[number])
-  }, 3000) // 3-second interval for active processing states
+  }, 10000) // 10-second interval for active processing states
 
   // Determine polling strategy based on route
   const getPollingInterval = () => {
