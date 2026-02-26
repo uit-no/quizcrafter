@@ -1,7 +1,6 @@
 {
   "greeting": "Hei, {{name}}",
   "welcome": "Velkommen tilbake! Her er en oversikt over quizene dine og nyttige ressurser.",
-  "developmentWarning": "Denne applikasjonen er for tiden i utviklingsfase av IFI-UiT og er ennå ikke offisielt lansert. Vær oppmerksom på at løpende support og fremtidig utvikling ikke er garantert. Quiz-data kan slettes når som helst. Funksjoner kan endres eller avvikles når som helst.",
   "panels": {
     "generation": {
       "title": "Quizer under generering",
@@ -34,8 +33,7 @@
       },
       "helpfulLinks": {
         "title": "Nyttige lenker",
-        "canvasUit": "Canvas UiT",
-        "contactDeveloper": "Kontakt utvikler",
+        "canvas": "Canvas",
         "githubRepo": "GitHub-repository",
         "questionTypes": "Guide til spørsmålstypene vi støtter"
       },

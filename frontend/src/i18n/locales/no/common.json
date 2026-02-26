@@ -123,11 +123,13 @@
     "stepProgress": "Steg {{current}} av {{total}}",
     "welcome": {
       "title": "Velkommen til QuizCrafter",
-      "description": "Takk for at du prøver oss. La oss vise deg rundt og hjelpe deg i gang med alt applikasjonen vår har å tilby.",
-      "developmentWarning": "Denne applikasjonen er for øyeblikket i en utviklingsfase av IFI-UIT og er ikke offisielt lansert ennå. Vær oppmerksom på at løpende støtte og fremtidig utvikling ikke er garantert. Quiz-data kan bli slettet når som helst. Funksjoner kan endres eller fjernes når som helst."
+      "description": "Takk for at du prøver oss. La oss vise deg rundt og hjelpe deg i gang med alt applikasjonen vår har å tilby."
     },
     "setup": {
-      "title": "Gjennomgang av applikasjonen"
+      "title": "Kom i gang",
+      "tip1": "Koble til Canvas og velg et emne der du er registrert som lærer",
+      "tip2": "Velg emnemoduler å inkludere — jo mer innhold, desto bedre spørsmål",
+      "tip3": "Gjennomgå genererte spørsmål og godkjenn eller avvis dem før eksport til Canvas"
     },
     "features": {
       "title": "Forbered kursene dine",
@@ -156,10 +158,7 @@
   "login": {
     "welcome": "Velkommen til QuizCrafter",
     "description": "Gjør Canvas-kursmaterialet ditt om til quizer av høy kvalitet med LLM-er. Bygg spørsmålsbanken din, godkjenn med et klikk, og generer quizer på få minutter.",
-    "errorMessage": "Det oppstod en feil under behandling av forespørselen din: {{error}}",
-    "helpTitle": "Usikker på hvordan det fungerer?",
-    "videoTitle": "QuizCrafter demonstrasjonsvideo",
-    "videoDescription": "Se hvordan QuizCrafter sømløst integreres med Canvas for å analysere kursmaterialet ditt og generere quizer av høy kvalitet."
+    "errorMessage": "Det oppstod en feil under behandling av forespørselen din: {{error}}"
   },
   "navigation": {
     "backToQuestionTypes": "Tilbake til spørsmålstyper"

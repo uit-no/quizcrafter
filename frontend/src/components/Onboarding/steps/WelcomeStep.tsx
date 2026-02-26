@@ -10,21 +10,9 @@ export const WelcomeStep = () => {
         <Text fontSize="2xl" fontWeight="bold" color="ui.main" mb={4}>
           {t("onboarding.welcome.title")}
         </Text>
-        <Text fontSize="lg" color="gray.600" lineHeight="tall" mb={6}>
+        <Text fontSize="lg" color="gray.600" lineHeight="tall">
           {t("onboarding.welcome.description")}
         </Text>
-        <Box
-          bg="orange.50"
-          border="1px"
-          borderColor="orange.200"
-          borderRadius="md"
-          px={4}
-          py={3}
-        >
-          <Text color="orange.700" fontWeight="medium">
-            ⚠️ {t("onboarding.welcome.developmentWarning")}
-          </Text>
-        </Box>
       </Box>
     </Stack>
   )

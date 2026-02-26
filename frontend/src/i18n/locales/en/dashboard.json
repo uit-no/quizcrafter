@@ -1,7 +1,6 @@
 {
   "greeting": "Hi, {{name}}",
   "welcome": "Welcome back! Here's an overview of your quizzes and helpful resources.",
-  "developmentWarning": "This application is currently in development phase by IFI-UIT and has not yet been officially released. Please be aware that ongoing support and future development are not guaranteed. Quiz data may be deleted at any time. Features may change or be discontinued at any time.",
   "panels": {
     "generation": {
       "title": "Quizzes Being Generated",
@@ -34,8 +33,7 @@
       },
       "helpfulLinks": {
         "title": "Helpful Links",
-        "canvasUit": "Canvas UiT",
-        "contactDeveloper": "Contact Developer",
+        "canvas": "Canvas",
         "githubRepo": "GitHub Repository",
         "questionTypes": "Question Types Guide"
       },

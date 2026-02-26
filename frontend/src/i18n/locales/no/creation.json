@@ -17,8 +17,7 @@
     "failedToLoad": "Kunne ikke laste emner",
     "selected": "Valgt: {{courseName}}",
     "courseId": "Emne-ID: {{id}}",
-    "unnamedCourse": "Emne uten navn",
-    "devWarning": "Under utvikling vises bare emner med prefikser 'INF-' og 'MIK-'. Kontakt oss hvis du ønsker å teste med andre emner."
+    "unnamedCourse": "Emne uten navn"
   },
   "quizTitle": {
     "label": "Tittel",

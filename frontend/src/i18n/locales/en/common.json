@@ -123,11 +123,13 @@
     "stepProgress": "Step {{current}} of {{total}}",
     "welcome": {
       "title": "Welcome to QuizCrafter",
-      "description": "Thanks for trying us out. Let us show you around and help you get started with everything our application has to offer.",
-      "developmentWarning": "This application is currently in a development phase by IFI-UIT and has not yet been officially released. Please be aware that ongoing support and future development are not guaranteed. Quiz data may be deleted at any time. Features may change or be discontinued at any time."
+      "description": "Thanks for trying us out. Let us show you around and help you get started with everything our application has to offer."
     },
     "setup": {
-      "title": "Walkthrough of the application"
+      "title": "Getting Started",
+      "tip1": "Connect to Canvas and select a course where you are enrolled as a teacher",
+      "tip2": "Choose course modules to include — the more content, the better the questions",
+      "tip3": "Review generated questions and approve or reject them before exporting to Canvas"
     },
     "features": {
       "title": "Prepare your courses",
@@ -156,10 +158,7 @@
   "login": {
     "welcome": "Welcome to QuizCrafter",
     "description": "Turn your Canvas course material into high-quality quizzes with LLMs. Build your question bank, approve with a click, and generate quizzes in minutes.",
-    "errorMessage": "There was an error processing your request: {{error}}",
-    "helpTitle": "Unsure how it works?",
-    "videoTitle": "QuizCrafter demonstration video",
-    "videoDescription": "Watch how QuizCrafter seamlessly integrates with Canvas to analyze your course materials and generate high-quality quizzes."
+    "errorMessage": "There was an error processing your request: {{error}}"
   },
   "navigation": {
     "backToQuestionTypes": "Back to Question Types"

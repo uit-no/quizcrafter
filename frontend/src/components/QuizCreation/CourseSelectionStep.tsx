@@ -115,17 +115,6 @@ export function CourseSelectionStep({
         <Text color="gray.600" fontSize="sm">
           {t("courseSelection.chooseDescription")}
         </Text>
-        <Box
-          bg="orange.50"
-          border="1px"
-          borderColor="orange.200"
-          borderRadius="md"
-          px={4}
-          py={3}
-          mt={4}
-        >
-          <Text color="orange.700">{t("courseSelection.devWarning")}</Text>
-        </Box>
       </Box>
 
       <RadioGroup.Root value={selectedCourse?.id?.toString() || ""}>

@@ -34,12 +34,12 @@ function PrivacyPolicy() {
           <Heading size="lg" mb={4}>
             1. Introduction
           </Heading>
+          {/* TODO: Update the organization name and description below for your deployment */}
           <Text mb={4}>
-            QuizCrafter is an application developed at UiT The Arctic University
-            of Norway to assist instructors and course coordinators in
-            generating quizzes based on course content from Canvas LMS. The
-            application streamlines the creation of question banks for quizzes
-            and exams.
+            QuizCrafter is an application developed at [Your Organization Name]
+            to assist instructors and course coordinators in generating quizzes
+            based on course content from Canvas LMS. The application streamlines
+            the creation of question banks for quizzes and exams.
           </Text>
           <Text mb={4}>
             To continuously improve AI-generated question quality, anonymized
@@ -279,9 +279,10 @@ function PrivacyPolicy() {
           <Heading size="lg" mb={4}>
             7. Contact Information
           </Heading>
+          {/* TODO: Update the contact name and email below for your deployment */}
           <Text>
             If you have any questions about this privacy policy, please contact
-            us at: Marius Solaas, marius.r.solaas@uit.no
+            us at: [Data Controller Name], [contact@yourdomain.com]
           </Text>
         </Box>
       </VStack>

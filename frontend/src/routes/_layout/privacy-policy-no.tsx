@@ -34,9 +34,10 @@ function PrivacyPolicyNo() {
           <Heading size="lg" mb={4}>
             1. Introduksjon
           </Heading>
+          {/* TODO: Oppdater organisasjonsnavnet nedenfor for din installasjon */}
           <Text mb={4}>
-            QuizCrafter er en applikasjon utviklet ved UiT Norges arktiske
-            universitet for å hjelpe forelesere og kurskoordinatorer med å
+            QuizCrafter er en applikasjon utviklet ved [Navn på din
+            organisasjon] for å hjelpe forelesere og kurskoordinatorer med å
             generere quizer basert på kursinnhold fra Canvas LMS. Applikasjonen
             forenkler opprettelsen av spørsmålsbanker for quizer og andre
             vurderinger.
@@ -283,9 +284,11 @@ function PrivacyPolicyNo() {
           <Heading size="lg" mb={4}>
             10. Kontaktinformasjon
           </Heading>
+          {/* TODO: Oppdater kontaktnavnet og e-posten nedenfor for din installasjon */}
           <Text>
             Hvis du har spørsmål om denne personvernerklæringen, vennligst
-            kontakt oss på: Marius Solaas, marius.r.solaas@uit.no
+            kontakt oss på: [Navn på behandlingsansvarlig],
+            [kontakt@dittdomene.no]
           </Text>
         </Box>
       </VStack>

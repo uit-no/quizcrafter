@@ -75,20 +75,6 @@ function Dashboard() {
               </RouterLink>
             </Button>
           </HStack>
-          {/* Warning Box */}
-          <Box
-            bg="orange.50"
-            border="1px"
-            borderColor="orange.200"
-            borderRadius="md"
-            px={4}
-            py={3}
-          >
-            <Text color="orange.700" fontWeight="medium">
-              ⚠️ {t("developmentWarning")}
-            </Text>
-          </Box>
-
           {/* Dashboard Panels */}
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}

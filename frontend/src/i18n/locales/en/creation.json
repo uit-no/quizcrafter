@@ -17,8 +17,7 @@
     "failedToLoad": "Failed to load courses",
     "selected": "Selected: {{courseName}}",
     "courseId": "Course ID: {{id}}",
-    "unnamedCourse": "Unnamed Course",
-    "devWarning": "During development, only courses with certain prefixes are shown. Contact us if you would like to test with other courses."
+    "unnamedCourse": "Unnamed Course"
   },
   "quizTitle": {
     "label": "Quiz Title",
