@@ -1,6 +1,6 @@
 {
   "name": "batch_fill_in_blank_no",
-  "version": "2.1",
+  "version": "2.0",
   "question_type": "fill_in_blank",
   "language": "no",
   "description": "Mal for å generere fyll-inn-spørsmål fra modulinnhold (forankret, variert, strenge regler for blank-justering)",

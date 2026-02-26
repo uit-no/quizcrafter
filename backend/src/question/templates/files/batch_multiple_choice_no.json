@@ -1,6 +1,6 @@
 {
   "name": "batch_multiple_choice_no",
-  "version": "1.0",
+  "version": "2.0",
   "question_type": "multiple_choice",
   "language": "no",
   "description": "Mal for generering av flere flervalgsspørsmål fra modulinnhold",

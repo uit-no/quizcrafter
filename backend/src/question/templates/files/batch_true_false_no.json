@@ -1,6 +1,6 @@
 {
   "name": "batch_true_false_no",
-  "version": "1.0",
+  "version": "2.0",
   "question_type": "true_false",
   "language": "no",
   "description": "Mal for generering av sant/usant-spørsmål fra modulinnhold",

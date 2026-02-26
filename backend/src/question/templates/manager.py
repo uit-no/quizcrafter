@@ -240,6 +240,7 @@ class TemplateManager:
             "template_messages_created",
             question_type=question_type.value,
             template_name=template.name,
+            template_version=template.version,
             system_prompt_length=len(system_prompt),
             user_prompt_length=len(user_prompt),
             variables_count=len(variables),
@@ -376,6 +377,7 @@ class TemplateManager:
                 logger.debug(
                     "template_loaded",
                     template_name=template.name,
+                    version=template.version,
                     question_type=template.question_type.value,
                     filepath=str(filepath),
                 )
