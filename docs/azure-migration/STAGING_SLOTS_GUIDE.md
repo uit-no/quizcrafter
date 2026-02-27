@@ -480,12 +480,23 @@ az webapp config set \
   --slot staging \
   --linux-fx-version "DOCKER|${ACR_LOGIN}/quizcrafter-frontend:staging"
 
-# Container settings
+# Container settings — set on BOTH slots so these swappable settings are symmetric.
+# If only set on staging, the first swap moves them to production and the new staging
+# slot loses them, breaking ACR pull on the next deploy.
 az webapp config appsettings set \
   --name p-qzcrft-frontend \
   --resource-group p-qzcrft \
   --slot staging \
   --settings \
+    DOCKER_REGISTRY_SERVER_URL="https://${ACR_LOGIN}" \
+    WEBSITES_PORT="80" \
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE="false"
+
+az webapp config appsettings set \
+  --name p-qzcrft-frontend \
+  --resource-group p-qzcrft \
+  --settings \
+    DOCKER_REGISTRY_SERVER_URL="https://${ACR_LOGIN}" \
     WEBSITES_PORT="80" \
     WEBSITES_ENABLE_APP_SERVICE_STORAGE="false"
 
@@ -679,14 +690,14 @@ docker push ${ACR_LOGIN}/quizcrafter-backend --all-tags
 
 ### Step 2: Deploy to staging slot
 
-Tell the staging slot to pull the new image:
+Tell the staging slot to pull the new image. Use the commit SHA tag — not `:latest` — so that a future production restart re-pulls the exact tested image rather than whatever `:latest` points to at that moment.
 
 ```bash
 az webapp config set \
   --name p-qzcrft-backend \
   --resource-group p-qzcrft \
   --slot staging \
-  --linux-fx-version "DOCKER|pqzcrftacr-afb8abgzafb6fxf5.azurecr.io/quizcrafter-backend:latest"
+  --linux-fx-version "DOCKER|pqzcrftacr-afb8abgzafb6fxf5.azurecr.io/quizcrafter-backend:${COMMIT_SHA}"
 
 az webapp restart \
   --name p-qzcrft-backend \
@@ -800,6 +811,8 @@ Confirm it talks to the staging backend (API calls go to the staging backend URL
 
 Once testing is complete, build the image **without** `--build-arg` — Vite will read `frontend/.env.production` and bake in `https://quizcrafter-api.uit.no`. This is the image that will go live.
 
+Use the commit SHA tag — not `:latest` — so that a future production restart re-pulls the exact tested image rather than whatever `:latest` points to at that moment.
+
 ```bash
 COMMIT_SHA=$(git rev-parse --short HEAD)
 ACR_LOGIN="pqzcrftacr-afb8abgzafb6fxf5.azurecr.io"
@@ -812,12 +825,12 @@ docker build --platform linux/amd64 \
 
 docker push ${ACR_LOGIN}/quizcrafter-frontend --all-tags
 
-# Redeploy staging slot with the production image (overwrites the staging-URL build)
+# Redeploy staging slot with the production image (pinned to commit SHA)
 az webapp config set \
   --name p-qzcrft-frontend \
   --resource-group p-qzcrft \
   --slot staging \
-  --linux-fx-version "DOCKER|${ACR_LOGIN}/quizcrafter-frontend:latest"
+  --linux-fx-version "DOCKER|${ACR_LOGIN}/quizcrafter-frontend:${COMMIT_SHA}"
 
 az webapp restart --name p-qzcrft-frontend --resource-group p-qzcrft --slot staging
 ```
@@ -1033,10 +1046,10 @@ docker build --platform linux/amd64 \
   ./backend && \
 docker push ${ACR_LOGIN}/quizcrafter-backend --all-tags
 
-# Deploy backend image to staging slot
+# Deploy backend image to staging slot (pin to commit SHA — not :latest)
 az webapp config set \
   --name p-qzcrft-backend --resource-group p-qzcrft --slot staging \
-  --linux-fx-version "DOCKER|pqzcrftacr-afb8abgzafb6fxf5.azurecr.io/quizcrafter-backend:latest" && \
+  --linux-fx-version "DOCKER|pqzcrftacr-afb8abgzafb6fxf5.azurecr.io/quizcrafter-backend:${COMMIT_SHA}" && \
 az webapp restart --name p-qzcrft-backend --resource-group p-qzcrft --slot staging
 
 # Build frontend for staging testing (VITE_API_URL points to staging backend)
@@ -1051,6 +1064,7 @@ az webapp config set \
 az webapp restart --name p-qzcrft-frontend --resource-group p-qzcrft --slot staging
 
 # Build frontend for production (before swap — no --build-arg, uses frontend/.env.production)
+# Pin to commit SHA — not :latest — so a production restart re-pulls the exact tested image
 ACR_LOGIN="pqzcrftacr-afb8abgzafb6fxf5.azurecr.io" && \
 COMMIT_SHA=$(git rev-parse --short HEAD) && \
 docker build --platform linux/amd64 \
@@ -1059,7 +1073,7 @@ docker build --platform linux/amd64 \
 docker push ${ACR_LOGIN}/quizcrafter-frontend --all-tags && \
 az webapp config set \
   --name p-qzcrft-frontend --resource-group p-qzcrft --slot staging \
-  --linux-fx-version "DOCKER|${ACR_LOGIN}/quizcrafter-frontend:latest" && \
+  --linux-fx-version "DOCKER|${ACR_LOGIN}/quizcrafter-frontend:${COMMIT_SHA}" && \
 az webapp restart --name p-qzcrft-frontend --resource-group p-qzcrft --slot staging
 
 # --- SWAP ---
@@ -1111,3 +1125,5 @@ az webapp config show \
 |------|--------|---------|
 | 2026-02-24 | Claude Code | Initial guide creation |
 | 2026-02-26 | Claude Code | Updated Phase 5.3 (WEB_CONCURRENCY=2, MALLOC_ARENA_MAX=2); rewrote Phase 6 for container-based frontend (managed identity + nginx via ACR, removed PM2/zip); updated Phase 8 first-deploy, Slot Settings table, frontend deployment workflow, and Quick Reference to match Step 10 and Step 12 of audit trail |
+| 2026-02-26 | Claude Code | Phase 6.2: added `DOCKER_REGISTRY_SERVER_URL` to both staging and production slots (swappable settings must be set on both sides to prevent asymmetry after the first swap; see audit trail issue #3) |
+| 2026-02-27 | Claude Code | Backend Step 2, Frontend Step 3, Quick Reference: changed `linuxFxVersion` in staging slot config from `:latest` to `${COMMIT_SHA}` — prevents a production restart from pulling a newer untested image when `:latest` has been updated for a staging build |

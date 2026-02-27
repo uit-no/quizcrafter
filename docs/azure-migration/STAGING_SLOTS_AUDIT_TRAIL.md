@@ -478,9 +478,39 @@ az webapp restart \
 
 ---
 
+## Post-Setup Fix: Production Pulled Staging Image on Restart
+
+**Status:** Resolved
+**Timestamp:** 2026-02-27
+
+### Symptom
+
+After a staging build was pushed (which updates the `:latest` tag in ACR), restarting the production backend App Service caused it to pull the new, untested staging image. Both production and staging `linuxFxVersion` settings pointed to `quizcrafter-backend:latest` and `quizcrafter-frontend:latest` respectively. Because `:latest` is mutable, any production restart — whether triggered manually, by Azure maintenance, or by a scale event — would re-pull whatever `:latest` currently pointed to in ACR.
+
+### Root Cause
+
+The deployment workflow set `linuxFxVersion` to the `:latest` tag on the staging slot before swapping. Since `linuxFxVersion` is a **swappable** setting, after a swap production also held `...:latest`. A restart of the production slot then fetched the newest `:latest` image from ACR, which could already be a mid-cycle staging build.
+
+### Fix
+
+Updated the deployment guide to configure the staging slot's `linuxFxVersion` with the immutable commit SHA tag instead of `:latest`:
+
+- **Backend** (Step 2): `DOCKER|.../quizcrafter-backend:${COMMIT_SHA}`
+- **Frontend** (Step 3, before swap): `DOCKER|.../quizcrafter-frontend:${COMMIT_SHA}`
+- **Quick Reference**: both inline commands updated to match
+
+The `:latest` tag is still pushed alongside the SHA tag (Step 1 is unchanged) — it remains available in ACR for convenience but is no longer referenced by either slot's `linuxFxVersion`. After a swap, production inherits the pinned SHA; a restart re-pulls that exact image.
+
+### Affected guide sections
+
+`docs/azure-migration/STAGING_SLOTS_GUIDE.md` — Regular Backend Deployment Workflow § Step 2, Regular Frontend Deployment Workflow § Step 3, Quick Reference.
+
+---
+
 ## Issues Found in Guide
 
 | # | Phase | Issue | Resolution |
 |---|-------|-------|------------|
 | 1 | 5.3 | `az webapp config appsettings set --slot-settings` with only setting names (no values) fails with Azure CLI 2.82.0: `not enough values to unpack (expected 2, got 1)` | Must include `name=value` pairs in `--slot-settings`. Corrected commands documented above. |
 | 2 | 5 | Guide does not check or clear `appCommandLine` on the backend staging slot | Added `az resource update --set properties.appCommandLine=""` step (same pattern as frontend Phase 6.2). The staging slot inherited a legacy gunicorn command that bypassed `start.sh` and prevented migrations from running. |
+| 3 | 6 | `DOCKER_REGISTRY_SERVER_URL` was set on the frontend **staging** slot but not on the **production** slot. During the first swap, Azure's swap preview flagged it as a config change — the staging value would travel to production and the production config (which lacked the key) would move back to staging, leaving the new staging slot without ACR registry config. | Set `DOCKER_REGISTRY_SERVER_URL` on the production frontend slot: `az webapp config appsettings set --name p-qzcrft-frontend --resource-group p-qzcrft --settings DOCKER_REGISTRY_SERVER_URL="https://pqzcrftacr-afb8abgzafb6fxf5.azurecr.io"`. Backend production slot already had the setting. Guide updated with an explicit production-slot setup step in Phase 6.2. |
